@@ -17,13 +17,15 @@ class NytimesTest < Minitest::Test
   end
 
   def test_it_can_get_array_of_stories
-		results = @hash[:results]
+		result = @hash[:results]
     assert result.is_a? (Array)
     assert_equal 44, result.count
   end
 
   def test_it_can_get_all_stories_with_subsection_of_politics
-		binding.pry
+		result = @hash[:results].select do |result_hash| 
+						 	result_hash[:subsection] == "Politics"
+						 end
 
     assert result.is_a? (Array)
     assert_equal 6, result.count
@@ -32,5 +34,4 @@ class NytimesTest < Minitest::Test
     assert_equal "Conspiracy Theories Made Alex Jones Very Rich. They May Bring Him Down.",
       result.last[:title]
   end
-
 end
